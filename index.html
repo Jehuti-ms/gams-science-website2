@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gams Science Department</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #159895;
+            --accent: #57C5B6;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: var(--shadow);
+            padding: 1.5rem 0;
+        }
+
+        .sidebar-menu {
+            padding: 0 1rem;
+        }
+
+        .sidebar-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-item > a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--dark);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .sidebar-item > a:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-item > a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-submenu {
+            padding-left: 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .sidebar-item.active .sidebar-submenu {
+            max-height: 1000px;
+        }
+
+        .sidebar-submenu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .sidebar-submenu a:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background-color: white;
+            margin: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .content-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 1rem;
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #144c63;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .compact-calendar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            max-width: 400px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            background: #e9ecef;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .calendar-day-header {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .calendar-day {
+            background: white;
+            padding: 0.5rem;
+            min-height: 40px;
+            border: 1px solid #e9ecef;
+            position: relative;
+            font-size: 0.8rem;
+        }
+
+        .calendar-day.empty {
+            background: #f8f9fa;
+        }
+
+        .calendar-day.today {
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--warning);
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .event-form {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(26, 95, 122, 0.25);
+            outline: none;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .file-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .file-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .file-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-meta {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .drive-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .shop-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .shop-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .shop-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon {
+            background: var(--light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .coming-soon i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* NEW: Styled Drive Integration */
+        .drive-integration {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .drive-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drive-header h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drive-container {
+            height: 600px;
+            position: relative;
+        }
+
+        .drive-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tabbed-drive {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .drive-tabs {
+            display: flex;
+            background: var(--light);
+            border-bottom: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .drive-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .drive-tab.active {
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 1rem;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .content {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .compact-calendar {
+                max-width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .drive-tabs {
+                flex-direction: column;
+            }
+
+            .drive-container {
+                height: 400px;
+            }
+
+            .drive-tab {
+                padding: 0.75rem 1rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-flask"></i>
+                <h1>Gams Science Department</h1>
+            </div>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="admin">Department Admin</a></li>
+                    <li><a href="#" class="nav-link" data-page="resources">Subject Resources</a></li>
+                    <li><a href="#" class="nav-link" data-page="subjects">Science Subjects</a></li>
+                    <li><a href="#" class="nav-link" data-page="exams">Examinations</a></li>
+                    <li><a href="#" class="nav-link" data-page="collaboration">Teacher Collaboration</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <div class="sidebar-item active">
+                    <a href="#" class="sidebar-link" data-page="home"><i class="fas fa-home"></i> Home</a>
+                </div>
+                
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" data-page="admin"><i class="fas fa-cogs"></i> Department Admin</a>
+                    <div class="sidebar-submenu">
+                        <a href="#" class="sidebar-link" data-tab="meetings">Meetings</a>
+                        <a href="#" class="sidebar-link" data-tab="documents">Documents</a>
+                        <a href="#" class="sidebar-link" data-tab="timetables">Timetables</a>
+                        <a href="#" class="sidebar-link" data-tab="budget">Budget</a>
+                        <a href="#" class="sidebar-link" data-tab="appraisals">Teacher Appraisals</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" data-page="resources"><i class="fas fa-book"></i> Subject Resources</a>
+                    <div class="sidebar-submenu">
+                        <a href="#" class="sidebar-link" data-tab="lesson-plans">Lesson Plans</a>
+                        <a href="#" class="sidebar-link" data-tab="curriculum">Curriculum</a>
+                        <a href="#" class="sidebar-link" data-tab="schemes">Schemes of Work</a>
+                        <a href="#" class="sidebar-link" data-tab="syllabus">Syllabus</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" data-page="subjects"><i class="fas fa-atom"></i> Science Subjects</a>
+                    <div class="sidebar-submenu">
+                        <a href="#" class="sidebar-link" data-tab="integrated">Integrated Science</a>
+                        <a href="#" class="sidebar-link" data-tab="biology">Biology</a>
+                        <a href="#" class="sidebar-link" data-tab="chemistry">Chemistry</a>
+                        <a href="#" class="sidebar-link" data-tab="physics">Physics</a>
+                        <a href="#" class="sidebar-link" data-tab="agricultural">Agricultural Science</a>
+                        <a href="#" class="sidebar-link" data-tab="human-bio">Human & Social Biology</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" data-page="exams"><i class="fas fa-file-alt"></i> Examinations</a>
+                    <div class="sidebar-submenu">
+                        <a href="#" class="sidebar-link" data-tab="past-papers">Past Papers</a>
+                        <a href="#" class="sidebar-link" data-tab="sba-materials">SBA Materials</a>
+                        <a href="#" class="sidebar-link" data-tab="mark-schemes">Mark Schemes</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" data-page="collaboration"><i class="fas fa-users"></i> Teacher Collaboration</a>
+                    <div class="sidebar-submenu">
+                        <a href="#" class="sidebar-link" data-tab="shared-resources">Shared Resources</a>
+                        <a href="#" class="sidebar-link" data-tab="work-progress">Work in Progress</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content">
+            <!-- Home Page -->
+            <div id="home-page" class="page-section active">
+                <div class="content-header">
+                    <h2>Welcome to Gams Science Department</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Dashboard</span>
+                    </div>
+                </div>
+
+                <div class="compact-calendar">
+                    <div class="calendar-header">
+                        <h3><i class="fas fa-calendar-alt"></i> Department Calendar</h3>
+                        <div class="calendar-nav">
+                            <button class="btn btn-sm btn-primary" id="prevMonth">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <h4 id="currentMonth">March 2024</h4>
+                            <button class="btn btn-sm btn-primary" id="nextMonth">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-grid" id="calendar"></div>
+
+                    <div class="event-form">
+                        <h4>Add New Event</h4>
+                        <form id="eventForm">
+                            <div class="form-group">
+                                <label class="form-label">Event Title</label>
+                                <input type="text" class="form-control" id="eventTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Event Date</label>
+                                <input type="date" class="form-control" id="eventDate" required>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-sm">Add Event</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cogs"></i> Department Admin</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Access meetings, documents, timetables, budgets, and administrative resources.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary nav-link" data-page="admin">Access Admin</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-book"></i> Subject Resources</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Lesson plans, curriculum materials, and teaching resources for all science subjects.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary nav-link" data-page="resources">View Resources</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-file-alt"></i> Examinations</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Internal and external examination resources, past papers, and SBA materials.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary nav-link" data-page="exams">Exam Resources</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-seedling"></i> Science Subjects</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Resources for Integrated Science, Biology, Chemistry, Physics, Agricultural Science, and more.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary nav-link" data-page="subjects">Browse Subjects</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rest of your home page content remains exactly the same -->
+                <div class="drive-section">
+                    <h3><i class="fas fa-atom"></i> Our Science Subjects</h3>
+                    <div class="cards">
+                        <div class="card">
+                            <div class="card-header" style="background: var(--success);">
+                                <h4>Integrated Science</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 1st Form - U5th Form</p>
+                                <p>Foundational science education covering basic principles.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="background: var(--primary);">
+                                <h4>Biology</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 4th Year - U5th Year</p>
+                                <p>Study of living organisms and life processes.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="background: #6f42c1;">
+                                <h4>Chemistry</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 4th Year - U5th Year</p>
+                                <p>Properties and interactions of matter and substances.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="background: #fd7e14;">
+                                <h4>Physics</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 4th Year - U5th Year</p>
+                                <p>Fundamental forces, matter, energy, and motion.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="background: #20c997;">
+                                <h4>Agricultural Science</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 4th Year - U5th Year</p>
+                                <p>Soil science, crop production, and agricultural techniques.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="background: #e83e8c;">
+                                <h4>Human & Social Biology</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Forms:</strong> 4th Year - U5th Year</p>
+                                <p>Human body systems and health sciences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Admin Page -->
+            <div id="admin-page" class="page-section">
+                <div class="content-header">
+                    <h2>Department Administration</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Department Admin</span>
+                    </div>
+                </div>
+
+                <div class="tabbed-drive">
+                    <div class="drive-tabs">
+                        <button class="drive-tab active" data-tab="meetings">Meetings</button>
+                        <button class="drive-tab" data-tab="documents">Documents</button>
+                        <button class="drive-tab" data-tab="timetables">Timetables</button>
+                        <button class="drive-tab" data-tab="budget">Budget</button>
+                        <button class="drive-tab" data-tab="appraisals">Teacher Appraisals</button>
+                    </div>
+
+                    <div class="tab-content active" id="meetings-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-users"></i> Meeting Documents</h4>
+                                <a href="https://drive.google.com/drive/folders/1r_KWV2Hmr6TL9mIqGvs1_U5Ypg38JrlD" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1r_KWV2Hmr6TL9mIqGvs1_U5Ypg38JrlD#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="documents-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-file-alt"></i> Department Documents</h4>
+                                <a href="https://drive.google.com/drive/folders/1xmripG03kOTrRRE-ZKTe9g50bBXBTmQP" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1xmripG03kOTrRRE-ZKTe9g50bBXBTmQP#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="timetables-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-calendar-alt"></i> Timetables</h4>
+                                <a href="https://drive.google.com/drive/folders/1pIcnOXAlMGRMWUOpB79_A0uMKh57-qyb" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1pIcnOXAlMGRMWUOpB79_A0uMKh57-qyb#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="budget-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-chart-pie"></i> Budget Documents</h4>
+                                <a href="https://drive.google.com/drive/folders/1fRJTkb3vkGjQ9JsOkur-SA2Leml_las8" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1fRJTkb3vkGjQ9JsOkur-SA2Leml_las8#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="appraisals-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-user-check"></i> Teacher Appraisals</h4>
+                                <a href="https://drive.google.com/drive/folders/1ZP4bfAlQzmceOyc_xMGJsDXnwslQnXaO" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1ZP4bfAlQzmceOyc_xMGJsDXnwslQnXaO#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject Resources Page -->
+            <div id="resources-page" class="page-section">
+                <div class="content-header">
+                    <h2>Subject Resources</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Subject Resources</span>
+                    </div>
+                </div>
+
+                <div class="tabbed-drive">
+                    <div class="drive-tabs">
+                        <button class="drive-tab active" data-tab="lesson-plans">Lesson Plans</button>
+                        <button class="drive-tab" data-tab="curriculum">Curriculum</button>
+                        <button class="drive-tab" data-tab="schemes">Schemes of Work</button>
+                        <button class="drive-tab" data-tab="syllabus">Syllabus</button>
+                    </div>
+
+                    <div class="tab-content active" id="lesson-plans-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-chalkboard-teacher"></i> Lesson Plans</h4>
+                                <a href="https://drive.google.com/drive/folders/1SrJnz7hgI43gXLKpzYuM4G20v9Wvs74S" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1SrJnz7hgI43gXLKpzYuM4G20v9Wvs74S#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="curriculum-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-graduation-cap"></i> Curriculum</h4>
+                                <a href="https://drive.google.com/drive/folders/1IBeXZrzax0RBPr_daPtc3ebDLIw2aW-L" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1IBeXZrzax0RBPr_daPtc3ebDLIw2aW-L#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="schemes-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-tasks"></i> Schemes of Work</h4>
+                                <a href="https://drive.google.com/drive/folders/1ro_Y2WmUPo1_FcqtDtmVsJhyPphwqMFd" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1ro_Y2WmUPo1_FcqtDtmVsJhyPphwqMFd#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="syllabus-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-book"></i> Syllabus</h4>
+                                <a href="https://drive.google.com/drive/folders/1qTVyw9dBSbSHolS3hcG3wybCSTU2uIZa" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1qTVyw9dBSbSHolS3hcG3wybCSTU2uIZa#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Science Subjects Page -->
+            <div id="subjects-page" class="page-section">
+                <div class="content-header">
+                    <h2>Science Subjects</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Science Subjects</span>
+                    </div>
+                </div>
+
+                <div class="tabbed-drive">
+                    <div class="drive-tabs">
+                        <button class="drive-tab active" data-tab="integrated">Integrated Science</button>
+                        <button class="drive-tab" data-tab="biology">Biology</button>
+                        <button class="drive-tab" data-tab="chemistry">Chemistry</button>
+                        <button class="drive-tab" data-tab="physics">Physics</button>
+                        <button class="drive-tab" data-tab="agricultural">Agricultural Science</button>
+                        <button class="drive-tab" data-tab="human-bio">Human & Social Biology</button>
+                    </div>
+
+                    <div class="tab-content active" id="integrated-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-vial"></i> Integrated Science</h4>
+                                <a href="https://drive.google.com/drive/folders/1s-He1WfkxyD8oX5mItBksTAfGtstHlmQ" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1s-He1WfkxyD8oX5mItBksTAfGtstHlmQ#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="biology-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-dna"></i> Biology</h4>
+                                <a href="https://drive.google.com/drive/folders/1A-1L-MfGhZ6DQPINJYu-9madsE691G1E" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1A-1L-MfGhZ6DQPINJYu-9madsE691G1E#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="chemistry-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-flask"></i> Chemistry</h4>
+                                <a href="https://drive.google.com/drive/folders/1zCeFKvY68qLhxZwtgyVShCsBHLogKQbx" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1zCeFKvY68qLhxZwtgyVShCsBHLogKQbx#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="physics-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-bolt"></i> Physics</h4>
+                                <a href="https://drive.google.com/drive/folders/1Sv6_H1qr3otCyipYdRzhoiErvWga6oct" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1Sv6_H1qr3otCyipYdRzhoiErvWga6oct#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="agricultural-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-tractor"></i> Agricultural Science</h4>
+                                <a href="https://drive.google.com/drive/folders/1reZANveBar1gPPbyBZc6D6199W12LkiV" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1reZANveBar1gPPbyBZc6D6199W12LkiV#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="human-bio-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-user-md"></i> Human & Social Biology</h4>
+                                <a href="https://drive.google.com/drive/folders/16i0xt0eGkirTMUEh2DDK9blGJwrZIORo" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=16i0xt0eGkirTMUEh2DDK9blGJwrZIORo#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examinations Page -->
+            <div id="exams-page" class="page-section">
+                <div class="content-header">
+                    <h2>Examinations</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Examinations</span>
+                    </div>
+                </div>
+
+                <div class="tabbed-drive">
+                    <div class="drive-tabs">
+                        <button class="drive-tab active" data-tab="past-papers">Past Papers</button>
+                        <button class="drive-tab" data-tab="sba-materials">SBA Materials</button>
+                        <button class="drive-tab" data-tab="mark-schemes">Mark Schemes</button>
+                    </div>
+
+                    <div class="tab-content active" id="past-papers-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-file-archive"></i> Past Papers</h4>
+                                <a href="https://drive.google.com/drive/folders/1TmGrwfSZ73VnWHLkdSXkD18UIjYnE5Ns" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1TmGrwfSZ73VnWHLkdSXkD18UIjYnE5Ns#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="sba-materials-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-clipboard-check"></i> SBA Materials</h4>
+                                <a href="https://drive.google.com/drive/folders/1soRbo76NQjzbWV9lLkTmfNeiMK1s1k72" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1soRbo76NQjzbWV9lLkTmfNeiMK1s1k72#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="mark-schemes-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-check-double"></i> Mark Schemes</h4>
+                                <a href="https://drive.google.com/drive/folders/1xAnpoLHZ-iJl3WJErkjtCcFK29P9_eRC" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1xAnpoLHZ-iJl3WJErkjtCcFK29P9_eRC#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher Collaboration Page -->
+            <div id="collaboration-page" class="page-section">
+                <div class="content-header">
+                    <h2>Teacher Collaboration</h2>
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> / <span>Teacher Collaboration</span>
+                    </div>
+                </div>
+
+                <div class="tabbed-drive">
+                    <div class="drive-tabs">
+                        <button class="drive-tab active" data-tab="shared-resources">Shared Resources</button>
+                        <button class="drive-tab" data-tab="work-progress">Work in Progress</button>
+                    </div>
+
+                    <div class="tab-content active" id="shared-resources-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-share-alt"></i> Shared Resources</h4>
+                                <a href="https://drive.google.com/drive/folders/1n0Kn3bp8VgvYYiQABBGVMQxKhQP10uR1" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1n0Kn3bp8VgvYYiQABBGVMQxKhQP10uR1#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="work-progress-tab">
+                        <div class="drive-integration">
+                            <div class="drive-header">
+                                <h4><i class="fas fa-hourglass-half"></i> Work in Progress</h4>
+                                <a href="https://drive.google.com/drive/folders/1lGfsLzAJdDF6t0tXZdS4-gGKUcS-ab_a" class="btn btn-primary btn-sm" target="_blank">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <div class="drive-container">
+                                <iframe src="https://drive.google.com/embeddedfolderview?id=1lGfsLzAJdDF6t0tXZdS4-gGKUcS-ab_a#list" class="drive-iframe" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">
+                <p>&copy; 2023 Gams Science Department. All rights reserved.</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Calendar functionality with today's date highlighting
+        let currentDate = new Date();
+        let events = JSON.parse(localStorage.getItem('departmentEvents')) || [];
+
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const currentMonth = document.getElementById('currentMonth');
+            
+            currentMonth.textContent = currentDate.toLocaleDateString('en-US', { 
+                month: 'long', 
+                year: 'numeric' 
+            });
+
+            calendar.innerHTML = '';
+
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendar.appendChild(dayHeader);
+            });
+
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const totalDays = lastDay.getDate();
+            const startingDay = firstDay.getDay();
+
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() === currentDate.getMonth() && today.getFullYear() === currentDate.getFullYear();
+
+            for (let i = 0; i < startingDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendar.appendChild(emptyDay);
+            }
+
+            for (let day = 1; day <= totalDays; day++) {
+                const dayElement = document.createElement('div');
+                const isToday = isCurrentMonth && day === today.getDate();
+                
+                dayElement.className = isToday ? 'calendar-day today' : 'calendar-day';
+                
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'day-number';
+                dayNumber.textContent = day;
+                dayElement.appendChild(dayNumber);
+
+                const dayEvents = events.filter(event => {
+                    const eventDate = new Date(event.date);
+                    return eventDate.getDate() === day && 
+                           eventDate.getMonth() === currentDate.getMonth() && 
+                           eventDate.getFullYear() === currentDate.getFullYear();
+                });
+
+                if (dayEvents.length > 0) {
+                    const eventDot = document.createElement('div');
+                    eventDot.className = 'event-dot';
+                    eventDot.title = dayEvents.map(event => event.title).join(', ');
+                    dayElement.appendChild(eventDot);
+                }
+
+                calendar.appendChild(dayElement);
+            }
+        }
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-link[data-page="' + pageId + '"]').forEach(link => {
+                link.classList.add('active');
+            });
+            
+            const breadcrumb = document.querySelector('.breadcrumb');
+            if (pageId === 'home') {
+                breadcrumb.innerHTML = '<a href="#" class="nav-link" data-page="home">Home</a> / <span>Dashboard</span>';
+            } else {
+                const pageTitle = document.getElementById(pageId + '-page').querySelector('h2').textContent;
+                breadcrumb.innerHTML = '<a href="#" class="nav-link" data-page="home">Home</a> / <span>' + pageTitle + '</span>';
+            }
+        }
+
+        document.querySelectorAll('.nav-link, .sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                const tab = this.getAttribute('data-tab');
+                
+                if (page) {
+                    showPage(page);
+                    document.querySelector('nav').classList.remove('active');
+                    
+                    // If there's a tab specified, activate it
+                    if (tab) {
+                        setTimeout(() => {
+                            document.querySelectorAll('.drive-tab').forEach(driveTab => {
+                                if (driveTab.getAttribute('data-tab') === tab) {
+                                    driveTab.click();
+                                }
+                            });
+                        }, 100);
+                    }
+                }
+            });
+        });
+
+        // Drive Tab functionality
+        document.querySelectorAll('.drive-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Update active tab
+                const tabsContainer = this.closest('.drive-tabs');
+                tabsContainer.querySelectorAll('.drive-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show active content
+                const tabContentContainer = this.closest('.tabbed-drive');
+                tabContentContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                tabContentContainer.querySelector(`#${tabId}-tab`).classList.add('active');
+            });
+        });
+
+        // Calendar event handling
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('eventTitle').value;
+            const date = document.getElementById('eventDate').value;
+
+            const newEvent = {
+                id: Date.now().toString(),
+                title: title,
+                date: date
+            };
+
+            events.push(newEvent);
+            localStorage.setItem('departmentEvents', JSON.stringify(events));
+            this.reset();
+            generateCalendar();
+            alert('Event added successfully!');
+        });
+
+        document.getElementById('prevMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar();
+        });
+
+        // Mobile navigation
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Sidebar functionality
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+            const link = item.querySelector('.sidebar-link');
+            link.addEventListener('click', function(e) {
+                if (item.querySelector('.sidebar-submenu')) {
+                    e.preventDefault();
+                    sidebarItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                }
+            });
+        });
+
+        // File download simulation
+        document.querySelectorAll('.file-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const fileName = this.querySelector('.file-name').textContent;
+                alert('This would download: ' + fileName + '\n\nFor now, this is a demo. When you add real files, this will work!');
+            });
+        });
+
+        // Initialize
+        generateCalendar();
+        
+        // Initialize first tab as active on each page
+        document.querySelectorAll('.drive-tab.active').forEach(tab => {
+            tab.click();
+        });
+    </script>
+</body>
+</html>
