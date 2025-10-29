@@ -1283,6 +1283,84 @@
         </section>
     </div>
 
+    <!--------- Shop Page --------->
+    <div id="shop-page" class="page-section">
+    <div class="content-header">
+        <h2>Science Department Shop</h2>
+        <div class="breadcrumb">
+            <a href="#" class="nav-link" data-page="home">Home</a> / <span>Shop</span>
+        </div>
+    </div>
+
+    <div class="shop-tabs">
+        <button class="shop-tab active" data-category="vegetables" onclick="showShopCategory('vegetables')">
+            <i class="fas fa-carrot"></i> Vegetables
+        </button>
+        <button class="shop-tab" data-category="plants" onclick="showShopCategory('plants')">
+            <i class="fas fa-leaf"></i> Plants
+        </button>
+        <button class="shop-tab" data-category="chickens" onclick="showShopCategory('chickens')">
+            <i class="fas fa-egg"></i> Chickens & Eggs
+        </button>
+    </div>
+
+    <!-- Vegetables Category -->
+    <div id="vegetables-shop" class="shop-category active">
+        <h3><i class="fas fa-carrot"></i> Fresh Vegetables</h3>
+        <p>Freshly harvested vegetables from our school garden</p>
+        <div class="shop-items-grid" id="vegetables-items">
+            <!-- Vegetables items will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Plants Category -->
+    <div id="plants-shop" class="shop-category">
+        <h3><i class="fas fa-leaf"></i> Plants & Flowers</h3>
+        <p>Beautiful plants and flowers grown by our students</p>
+        <div class="shop-items-grid" id="plants-items">
+            <!-- Plants items will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Chickens Category -->
+    <div id="chickens-shop" class="shop-category">
+        <h3><i class="fas fa-egg"></i> Chickens & Eggs</h3>
+        <p>Fresh eggs and poultry from our school farm</p>
+        <div class="shop-items-grid" id="chickens-items">
+            <!-- Chickens items will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="cart-section">
+        <div class="cart-header">
+            <div class="cart-title">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Shopping Cart</h3>
+                <div class="cart-badge" id="cart-count">0</div>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-clear" onclick="clearCart()">
+                    <i class="fas fa-trash"></i> Clear Cart
+                </button>
+            </div>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                $<span class="cart-total-amount" id="cart-total">0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
+</div>
     <footer>
         <div class="container footer-content">
             <div class="copyright">
